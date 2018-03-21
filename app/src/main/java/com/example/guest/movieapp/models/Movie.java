@@ -1,23 +1,30 @@
 package com.example.guest.movieapp.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by Guest on 3/21/18.
  */
 
+@Parcel
 public class Movie {
-    private String name;
-    private String releaseDate;
-    private String rating;
-    private String imageUrl;
-    private String synopsis;
+    String name;
+    String releaseDate;
+    String rating;
+    String synopsis;
+    String backdropUrl;
+    String posterUrl;
 
 
-    public Movie(String name) {
+    public Movie() {}
+
+    public Movie(String name, String releaseDate, String rating, String posterUrl, String backdropUrl, String synopsis) {
         this.name = name;
-//        this.releaseDate = releaseDate;
-//        this.rating = rating;
-//        this.imageUrl = imageUrl;
-//        this.synopsis = synopsis;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+        this.backdropUrl = backdropUrl;
+        this.synopsis = synopsis;
+        this.posterUrl = posterUrl;
     }
 
     public String getName() {
@@ -32,8 +39,12 @@ public class Movie {
         return rating;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getBackdropUrl() {
+        return backdropUrl;
+    }
+
+    public String getPosterUrl() {
+        return posterUrl;
     }
 
     public String getSynopsis() {

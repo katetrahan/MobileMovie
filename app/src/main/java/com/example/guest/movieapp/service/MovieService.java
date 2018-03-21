@@ -49,10 +49,19 @@ public class MovieService {
         try {
             String jsonData = response.body().string();
             JSONObject movieJSON = new JSONObject(jsonData);
-            JSONArray businessesJSON = movieJSON.getJSONArray("results");
-            for (int i = 0; i < businessesJSON.length(); i++) {
-                JSONObject titleJSON = businessesJSON.getJSONObject(i);
+            JSONArray resultsJSON = movieJSON.getJSONArray("results");
+            for (int i = 0; i < resultsJSON.length(); i++) {
+                JSONObject titleJSON = resultsJSON.getJSONObject(i);
                 String title = titleJSON.getString("title");
+                String rating = titleJSON.getString("vote_average");
+                String synopsis = titleJSON.getString("overview");
+                String posterVariable = titleJSON.getString("poster_path");
+                String backdropVariable = titleJSON.getString("backdrop_path");
+
+                String releaseDate = titleJSON.getString("release_date");
+                String posterUrl = "http://image.tmdb.org/t/p/w185/" + posterVariable;
+                String backdropUrl = "http://image.tmdb.org/t/p/w342/" + backdropVariable;
+                Log.d(posterVariable, "poster");
 
 
 
@@ -62,7 +71,7 @@ public class MovieService {
 //                for (int y = 0; y < categoriesJSON.length(); y++) {
 //                    categories.add(categoriesJSON.getJSONObject(y).getString("title"));
 //                }
-                Movie movie = new Movie(title);
+                Movie movie = new Movie(title, releaseDate, rating, posterUrl, backdropUrl, synopsis);
                 movies.add(movie);
             }
         }
